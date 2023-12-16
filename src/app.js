@@ -1,5 +1,6 @@
 import express from "express";
 import { routerMascotas } from "../rutas/mascotasRouter.js";
+import { routerAdopcion } from "../rutas/adopcionRouter.js";
 import {db} from "../database/conexion.js";
 
 //Crear Instancia de Express
@@ -16,13 +17,14 @@ db.authenticate().then(()=>{
 
 //Definir Rutas
 app.get("/",(req,res)=>{
-    res.send("Hola Backend Mysql");
+    res.send("HOGAR MASCOTAS FELICES");
 });
 
 //Rutas
 app.use("/mascotas",routerMascotas);
+app.use("/adopcion",routerAdopcion);
 //Puerto de Servidor 
-const PORT=8000;
+const PORT=9000;
 
 
 //Verificar que pueda sincronizar con la base de datos

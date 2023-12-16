@@ -10,7 +10,9 @@ const crear = (req,res)=>{
     }
     const dataset={
         nombre: req.body.nombre,
-        edad: req.body.edad
+        edad: req.body.edad,
+        tipo: req.body.tipo,
+        raza: req.body.raza
     };
 
     //Usar Sequelize para crear el recurso
@@ -24,7 +26,6 @@ const crear = (req,res)=>{
         })
 
     })
-
 
 };
 
@@ -64,10 +65,9 @@ const buscar = (req,res)=>{
 };
 
 //Actualizar un recurso
-
 const actualizar=(req,res)=>{
     const id= req.params.id;
-    if(!req.body.nombre && !req.body.edad){
+    if(!req.body.nombre && !req.body.edad && !req.body.tipo && !req.body.raza){
         res.status(400).json({
             mensaje: `No se encontraron Datos para Actualizar`
         });
@@ -75,8 +75,10 @@ const actualizar=(req,res)=>{
     }
     else{
         const nombre= req.body.nombre;
-        const edad=req.body.edad;
-        mascotas.update({nombre,edad},{where:{id}})
+        const edad= req.body.edad;
+        const tipo= req.body.tipo;
+        const raza= req.body.raza;
+        mascotas.update({nombre,edad,tipo,raza},{where:{id}})
         .then((resultado)=>{
             res.status(200).json({
                 mensaje: `Registro Actualizado`
